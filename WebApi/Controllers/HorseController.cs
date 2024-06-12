@@ -26,10 +26,12 @@ public class HorseController : ControllerBase
     }
 
     [HttpPost]
-    public Horse Post(Horse horse)
+     public Horse Post([FromBody] Horse horse)
     {
-        var foundHorse = _db.Find<Horse>(horse.HorseId);
-        return foundHorse;
+        _db.Add(horse);
+        _db.SaveChanges();
+        Horse createdHorse = _db.Horses.Find(horse.HorseId);
+        return createdHorse;
     }
 
     [HttpGet("CreateHorses")]
@@ -39,5 +41,11 @@ public class HorseController : ControllerBase
     _db.Add(new Horse { Name = "Polly" });
     _db.SaveChanges();
     return "Created";
+    }
+
+    [HttpGet("env")]
+    public string GetEnv()
+    {
+        return "success";
     }
 }
