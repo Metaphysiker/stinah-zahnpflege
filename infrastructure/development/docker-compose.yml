@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "${PORT_BACKEND}:8080"
+    depends_on:
+      - postgres
   vue:
     build:
       context: ../../vue-app
@@ -17,7 +19,19 @@ services:
       - .env
     ports:
       - "${PORT_FRONTEND}:8080"
+    depends_on:
+      - webapi
   npm:
     build: ../../tools/npm
     volumes:
       - ../../:/app
+  dotnet:
+    build: ../../tools/dotnet
+    volumes:
+      - ../../:/app
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_PASSWORD=abc
+      - POSTGRES_USER=abc
+      - POSTGRES_DB=abc
