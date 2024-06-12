@@ -1,0 +1,11 @@
+/home/sandro/workspace/stinah-hufpflege/WebApi/out/WebApi
+/home/sandro/workspace/stinah-hufpflege/WebApi/out/appsettings.Development.json
+/home/sandro/workspace/stinah-hufpflege/WebApi/out/appsettings.json
+/home/sandro/workspace/stinah-hufpflege/WebApi/out/WebApi.dll
+/home/sandro/workspace/stinah-hufpflege/WebApi/out/WebApi.deps.json
+/home/sandro/workspace/stinah-hufpflege/WebApi/out/WebApi.runtimeconfig.json
+/home/sandro/workspace/stinah-hufpflege/WebApi/out/WebApi.pdb
+/home/sandro/workspace/stinah-hufpflege/WebApi/out/Microsoft.OpenApi.dll
+/home/sandro/workspace/stinah-hufpflege/WebApi/out/Swashbuckle.AspNetCore.Swagger.dll
+/home/sandro/workspace/stinah-hufpflege/WebApi/out/Swashbuckle.AspNetCore.SwaggerGen.dll
+/home/sandro/workspace/stinah-hufpflege/WebApi/out/Swashbuckle.AspNetCore.SwaggerUI.dll

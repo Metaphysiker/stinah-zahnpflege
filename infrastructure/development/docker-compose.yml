@@ -1,0 +1,23 @@
+services:
+  webapi:
+    build:
+      context: ../../WebApi
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT_BACKEND}:8080"
+  vue:
+    build:
+      context: ../../vue-app
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: "${API_BASE_URL}"
+    volumes:
+      - ../../vue-app/src:/app/src
+    env_file:
+      - .env
+    ports:
+      - "${PORT_FRONTEND}:8080"
+  npm:
+    build: ../../tools/npm
+    volumes:
+      - ../../:/app
