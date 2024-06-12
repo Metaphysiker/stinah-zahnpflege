@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
-public class HorseController : ControllerBase
+[Route("api/[controller]")]
+public class HorsesController : ControllerBase
 {
     private readonly DatabaseContext _db;
 
-    public HorseController(DatabaseContext db)
+    public HorsesController(DatabaseContext db)
     {
         _db = db;
     }
