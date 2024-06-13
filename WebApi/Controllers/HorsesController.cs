@@ -46,11 +46,11 @@ public class HorsesController : ControllerBase
     }
 
     [HttpPost]
-     public ActionResult<Horse> Post([FromBody] Horse horse)
+    public ActionResult<Horse> Post([FromBody] Horse horse)
     {
         _db.Add(horse);
         _db.SaveChanges();
-        var createdHorse = _db.Horses.Find(horse.HorseId);
+        var createdHorse = _db.Horses.Find(horse.Id);
         if (createdHorse == null)
         {
             return BadRequest();
@@ -61,10 +61,10 @@ public class HorsesController : ControllerBase
     [HttpGet("CreateHorses")]
     public string CreateHorses()
     {
-    Console.WriteLine("Inserting a new Horse");
-    _db.Add(new Horse { Name = "Polly" });
-    _db.SaveChanges();
-    return "Created";
+        Console.WriteLine("Inserting a new Horse");
+        _db.Add(new Horse { Name = "Polly" });
+        _db.SaveChanges();
+        return "Created";
     }
 
     [HttpGet("env")]

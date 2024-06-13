@@ -23,11 +23,11 @@ namespace WebApi.Migrations
 
             modelBuilder.Entity("Horse", b =>
                 {
-                    b.Property<int>("HorseId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("HorseId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateOnly>("LastTimeTreated")
                         .HasColumnType("date");
@@ -39,7 +39,7 @@ namespace WebApi.Migrations
                     b.Property<int>("NumberOfWeeksUntilNextTreatment")
                         .HasColumnType("integer");
 
-                    b.HasKey("HorseId");
+                    b.HasKey("Id");
 
                     b.ToTable("Horses");
                 });

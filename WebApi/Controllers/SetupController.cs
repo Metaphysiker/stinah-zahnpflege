@@ -9,11 +9,13 @@ public class SetupController : ControllerBase
 {
     private readonly DatabaseContext _db;
     private readonly UserManager<IdentityUser> _userManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
 
-    public SetupController(DatabaseContext db, UserManager<IdentityUser> userManager)
+    public SetupController(DatabaseContext db, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
     {
         _db = db;
         _userManager = userManager;
+        _roleManager = roleManager;
     }
 
     [HttpGet]
@@ -25,15 +27,29 @@ public class SetupController : ControllerBase
     [HttpGet("CreateAdmin")]
     public async Task<ActionResult<IdentityUser>> CreateAdmin()
     {
+        var adminRole = await _roleManager.FindByNameAsync("Admin");
+        if (adminRole == null)
+        {
+            adminRole = new IdentityRole { Name = "Admin" };
+            await _roleManager.CreateAsync(adminRole);
+        }
+
         var admin = await _userManager.FindByEmailAsync("s.raess@me.com");
         if (admin != null)
         {
-            await _userManager.AddToRoleAsync(admin, "Admin");
-        } else {
-        admin = new IdentityUser { UserName = "s.raess@me.com", Email = "s.raess@me.com" };
-        await _userManager.CreateAsync(admin, "password");
+            await _userManager.AddToRoleAsync(admin, adminRole.Name);
         }
-            await _userManager.AddToRoleAsync(admin, "Admin");
+        else
+        {
+            admin = new IdentityUser { UserName = "s.raess@me.com", Email = "s.raess@me.com" };
+            string? adminPassword = Environment.GetEnvironmentVariable("ADMIN_PASSWORD");
+            if (adminPassword == null)
+            {
+                adminPassword = "password";
+            }
+            _userManager.CreateAsync(admin, adminPassword).Wait();
+        }
+        await _userManager.AddToRoleAsync(admin, "Admin");
 
         return admin;
     }
