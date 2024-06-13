@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;
@@ -19,18 +20,41 @@ public class HorsesController : ControllerBase
         return _db.Horses.ToList();
     }
 
-    [HttpGet("{id}")]
-    public Horse GetById(int id)
+    [HttpGet("protected")]
+    [Authorize]
+    public List<Horse> ProtectedGet()
     {
-        return _db.Horses.Find(id);
+        return _db.Horses.ToList();
+    }
+
+    [HttpGet("protectedadmin")]
+    [Authorize(Roles = "Admin")]
+    public List<Horse> ProtectedAdminGet()
+    {
+        return _db.Horses.ToList();
+    }
+
+    [HttpGet("{id}")]
+    public ActionResult<Horse> GetById(int id)
+    {
+        var horse = _db.Horses.Find(id);
+        if (horse == null)
+        {
+            return NotFound();
+        }
+        return horse;
     }
 
     [HttpPost]
-     public Horse Post([FromBody] Horse horse)
+     public ActionResult<Horse> Post([FromBody] Horse horse)
     {
         _db.Add(horse);
         _db.SaveChanges();
-        Horse createdHorse = _db.Horses.Find(horse.HorseId);
+        var createdHorse = _db.Horses.Find(horse.HorseId);
+        if (createdHorse == null)
+        {
+            return BadRequest();
+        }
         return createdHorse;
     }
 

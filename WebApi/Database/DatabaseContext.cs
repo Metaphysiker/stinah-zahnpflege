@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
-public class DatabaseContext : DbContext
+public class DatabaseContext : IdentityDbContext<IdentityUser>
 {
     public DbSet<Horse> Horses { get; set; }
 
