@@ -41,4 +41,9 @@ const nextTreatmentDate = computed(() => {
     variant="underlined"
     type="number"
   ></v-text-field>
+  <v-textarea
+    label="Zu beachten beim nächsten Mal"
+    v-model="horseToBeEdited.noteForNextTreatment"
+    variant="outlined"
+  ></v-textarea>
 </template>

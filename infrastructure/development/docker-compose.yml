@@ -34,6 +34,9 @@ services:
       - ../../:/app
     env_file:
       - .env
+    entrypoint: sh -c "cd WebApi && dotnet ef database update"
+    depends_on:
+      - webapi
   postgres:
     image: postgres:16-alpine
     env_file:

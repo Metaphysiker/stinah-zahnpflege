@@ -5,4 +5,5 @@ public class Horse : IModel
     public DateTime LastTimeTreated { get; set; } = DateTime.Now;
     public int NumberOfWeeksUntilNextTreatment { get; set; } = 0;
     public int BirthYear { get; set; } = 0;
+    public string NoteForNextTreatment { get; set; } = string.Empty;
 }
