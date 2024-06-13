@@ -2,16 +2,19 @@
 import { IHorse } from "../../interfaces/IHorse";
 import { HorseHelper } from "../../helpers/HorseHelper";
 import DateSelecter from "@/dates/DateSelecter.vue";
+import { computed } from "vue";
 const horseHelper = new HorseHelper();
 const horseToBeEdited = defineModel({
   required: true,
   type: Object as () => IHorse,
 });
-const numberOfWeeksUntilNextBeschlagenChanged = () => {
+
+const nextTreatmentDate = computed(() => {
   if (horseToBeEdited.value) {
-    horseHelper.calculateAndSetNextTimeBeschlagen(horseToBeEdited.value);
+    return horseHelper.getNextTreatmentDateString(horseToBeEdited.value);
   }
-};
+  return "";
+});
 </script>
 <template>
   <v-text-field
@@ -28,7 +31,14 @@ const numberOfWeeksUntilNextBeschlagenChanged = () => {
     v-model="horseToBeEdited.numberOfWeeksUntilNextTreatment"
     variant="underlined"
     type="number"
-    :change="numberOfWeeksUntilNextBeschlagenChanged()"
   ></v-text-field>
-  <div class="my-2">Nächste Mal beschlagen am:</div>
+  <div class="my-2">
+    Nächste Behandlung: <strong>{{ nextTreatmentDate }}</strong>
+  </div>
+  <v-text-field
+    label="Jahrgang"
+    v-model="horseToBeEdited.birthYear"
+    variant="underlined"
+    type="number"
+  ></v-text-field>
 </template>

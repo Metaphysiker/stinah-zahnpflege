@@ -1,10 +1,13 @@
 import { IHorse } from "@/interfaces/IHorse";
+import { HorseHelper } from "./HorseHelper";
 
 export class UrgencyHelper {
+  horseHelper = new HorseHelper();
   calculateUrgency(horse: IHorse) {
     const now = new Date();
-    const nextTimeBeschlagen = new Date();
-    const difference = nextTimeBeschlagen.getTime() - now.getTime();
+    const nextTreatmentDate =
+      this.horseHelper.calculateNextTreatmentDate(horse);
+    const difference = nextTreatmentDate.getTime() - now.getTime();
     return difference / (1000 * 60 * 60 * 24);
   }
 

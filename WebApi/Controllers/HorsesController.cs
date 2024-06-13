@@ -58,6 +58,32 @@ public class HorsesController : ControllerBase
         return createdHorse;
     }
 
+    [HttpPut]
+    public ActionResult<Horse> Put([FromBody] Horse horse)
+    {
+        _db.Update(horse);
+        _db.SaveChanges();
+        var updatedHorse = _db.Horses.Find(horse.Id);
+        if (updatedHorse == null)
+        {
+            return BadRequest();
+        }
+        return updatedHorse;
+    }
+
+    [HttpDelete("{id}")]
+    public ActionResult Delete(int id)
+    {
+        var horse = _db.Horses.Find(id);
+        if (horse == null)
+        {
+            return NotFound();
+        }
+        _db.Remove(horse);
+        _db.SaveChanges();
+        return NoContent();
+    }
+
     [HttpGet("CreateHorses")]
     public string CreateHorses()
     {

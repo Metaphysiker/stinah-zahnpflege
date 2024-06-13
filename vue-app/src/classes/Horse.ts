@@ -5,12 +5,14 @@ export class Horse implements IHorse {
   name: string;
   lastTimeTreated: Date;
   numberOfWeeksUntilNextTreatment: number;
+  birthYear: number;
 
   constructor() {
     this.id = 0;
     this.name = "";
     this.lastTimeTreated = new Date();
     this.numberOfWeeksUntilNextTreatment = 8;
+    this.birthYear = 0;
   }
 
   clone(original: IHorse): IHorse {
@@ -20,6 +22,7 @@ export class Horse implements IHorse {
     horse.lastTimeTreated = new Date(original.lastTimeTreated);
     horse.numberOfWeeksUntilNextTreatment =
       original.numberOfWeeksUntilNextTreatment;
+    horse.birthYear = original.birthYear;
     return horse;
   }
 
@@ -29,6 +32,7 @@ export class Horse implements IHorse {
     this.numberOfWeeksUntilNextTreatment =
       horse.numberOfWeeksUntilNextTreatment;
     this.lastTimeTreated = new Date(horse.lastTimeTreated);
+    this.birthYear = horse.birthYear;
     return this;
   }
 

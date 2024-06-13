@@ -4,8 +4,7 @@ export class AxiosInstanceFactory {
   static createAxiosInstance(axiosInstance: AxiosStatic | undefined) {
     if (!axiosInstance) {
       axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
-      axios.defaults.headers.post["Content-Type"] =
-        "application/x-www-form-urlencoded";
+      axios.defaults.headers.post["Content-Type"] = "application/json";
       return axios;
     } else {
       return axiosInstance;

@@ -29,7 +29,7 @@ export class HorseService implements IService {
   create(horse: IHorse) {
     return new Promise<IHorse>((resolve, reject) => {
       this.axiosInstance
-        .post("horses", horse)
+        .post("api/horses", horse)
         .then((response: any) => {
           const horse = this.horse.convertToHorse(response.data);
           resolve(horse);
@@ -43,7 +43,7 @@ export class HorseService implements IService {
   update(horse: IHorse) {
     return new Promise<IHorse>((resolve, reject) => {
       this.axiosInstance
-        .put("api/horses/" + horse.id, horse)
+        .put("api/horses", horse)
         .then((response: any) => {
           const horse = this.horse.convertToHorse(response.data);
           resolve(horse);
