@@ -7,9 +7,7 @@ import type { AxiosStatic } from "axios";
 import { Ref, inject, onMounted, ref } from "vue";
 import { IHorse } from "../../interfaces/IHorse";
 import { HorseHelper } from "../../helpers/HorseHelper";
-import TreatmentForm from "../treatments/TreatmentForm.vue";
-import { ITreatment } from "@/interfaces/ITreatment";
-import { Treatment } from "@/classes/Treatment";
+import NewTreatment from "../treatments/NewTreatment.vue";
 const horseHelper = new HorseHelper();
 const axios: AxiosStatic | undefined = inject("axios");
 const horseService = new HorseService(axios);
@@ -53,8 +51,6 @@ const clickOnBehandelt = (horse: IHorse) => {
   horseTreated(horse);
   newTreatmentDialog.value = true;
 };
-
-const newTreatment: Ref<ITreatment> = ref(new Treatment());
 </script>
 
 <template>
@@ -129,7 +125,7 @@ const newTreatment: Ref<ITreatment> = ref(new Treatment());
   <v-dialog max-width="500" v-model="newTreatmentDialog">
     <v-card>
       <v-card-text>
-        <TreatmentForm v-model="newTreatment"></TreatmentForm>
+        <NewTreatment @created="newTreatmentDialog = false"></NewTreatment>
       </v-card-text>
 
       <v-card-actions>

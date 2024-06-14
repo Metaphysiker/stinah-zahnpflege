@@ -3,6 +3,7 @@ import { IService } from "../interfaces/IService";
 import { AxiosInstanceFactory } from "../factories/AxiosInstanceFactory";
 import { ITreatment } from "@/interfaces/ITreatment";
 import { TreatmentHelper } from "@/helpers/TreatmentHelper";
+import { ITreatmentSearch } from "@/interfaces/ITreatmentSearch";
 
 export class TreatmentService implements IService {
   treatmentHelper = new TreatmentHelper();
@@ -65,6 +66,22 @@ export class TreatmentService implements IService {
         .delete("api/treatments/" + treatment.id)
         .then((response: any) => {
           resolve();
+        })
+        .catch((e: any) => {
+          reject(e);
+        });
+    });
+  }
+
+  search(treatmentSearch: ITreatmentSearch) {
+    return new Promise<ITreatment[]>((resolve, reject) => {
+      this.axiosInstance
+        .post("api/treatments", treatmentSearch)
+        .then((response: any) => {
+          const treatments = this.treatmentHelper.convertToTreatments(
+            response.data
+          );
+          resolve(treatments);
         })
         .catch((e: any) => {
           reject(e);
