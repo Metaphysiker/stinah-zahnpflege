@@ -2,8 +2,10 @@ import { AxiosStatic } from "axios";
 import { IService } from "../interfaces/IService";
 import { AxiosInstanceFactory } from "../factories/AxiosInstanceFactory";
 import { ITreatment } from "@/interfaces/ITreatment";
+import { TreatmentHelper } from "@/helpers/TreatmentHelper";
 
 export class TreatmentService implements IService {
+  treatmentHelper = new TreatmentHelper();
   axiosInstance: AxiosStatic;
   constructor(axios: AxiosStatic | undefined) {
     this.axiosInstance = AxiosInstanceFactory.createAxiosInstance(axios);
@@ -14,7 +16,9 @@ export class TreatmentService implements IService {
       this.axiosInstance
         .get("api/treatments")
         .then((response: any) => {
-          const treatments = this.treatment.convertToHorses(response.data);
+          const treatments = this.treatmentHelper.convertToTreatments(
+            response.data
+          );
           resolve(treatments);
         })
         .catch((e: any) => {
@@ -28,8 +32,10 @@ export class TreatmentService implements IService {
       this.axiosInstance
         .post("api/treatments", treatment)
         .then((response: any) => {
-          const horse = this.treatment.convertToHorse(response.data);
-          resolve(horse);
+          const createdTreatment = this.treatmentHelper.convertToTreatment(
+            response.data
+          );
+          resolve(createdTreatment);
         })
         .catch((e: any) => {
           reject(e);
@@ -42,8 +48,10 @@ export class TreatmentService implements IService {
       this.axiosInstance
         .put("api/treatments", treatment)
         .then((response: any) => {
-          const horse = this.treatment.convertToHorse(response.data);
-          resolve(horse);
+          const updatedTreatment = this.treatmentHelper.convertToTreatment(
+            response.data
+          );
+          resolve(updatedTreatment);
         })
         .catch((e: any) => {
           reject(e);
