@@ -1,10 +1,17 @@
 <script setup lang="ts">
-import { Ref, inject, ref } from "vue";
+import { Ref, inject, onBeforeMount, ref } from "vue";
 import { AxiosStatic } from "axios";
 import { ITreatment } from "@/interfaces/ITreatment";
 import { Treatment } from "@/classes/Treatment";
 import { TreatmentService } from "@/services/TreatmentService";
 import TreatmentForm from "./TreatmentForm.vue";
+import { IHorse } from "@/interfaces/IHorse";
+const props = defineProps({
+  horseInput: {
+    required: true,
+    type: Object as () => IHorse,
+  },
+});
 const emit = defineEmits(["created"]);
 const axios: AxiosStatic | undefined = inject("axios");
 const treatmentService = new TreatmentService(axios);
@@ -14,6 +21,10 @@ const create = () => {
     emit("created");
   });
 };
+
+onBeforeMount(() => {
+  newTreatment.value.horseId = props.horseInput.id;
+});
 </script>
 <template>
   <v-card-title>Neue Behandlung </v-card-title>

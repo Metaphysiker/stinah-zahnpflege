@@ -8,6 +8,7 @@ import { Ref, inject, onMounted, ref } from "vue";
 import { IHorse } from "../../interfaces/IHorse";
 import { HorseHelper } from "../../helpers/HorseHelper";
 import NewTreatment from "../treatments/NewTreatment.vue";
+const currentHorse: Ref<IHorse | undefined> = ref(undefined);
 const horseHelper = new HorseHelper();
 const axios: AxiosStatic | undefined = inject("axios");
 const horseService = new HorseService(axios);
@@ -49,6 +50,7 @@ const newTreatmentDialog = ref(false);
 
 const clickOnBehandelt = (horse: IHorse) => {
   horseTreated(horse);
+  currentHorse.value = horse;
   newTreatmentDialog.value = true;
 };
 </script>
@@ -125,13 +127,18 @@ const clickOnBehandelt = (horse: IHorse) => {
   <v-dialog max-width="500" v-model="newTreatmentDialog">
     <v-card>
       <v-card-text>
-        <NewTreatment @created="newTreatmentDialog = false"></NewTreatment>
-      </v-card-text>
+        <div v-if="currentHorse">
+          <NewTreatment
+            :horse-input="currentHorse"
+            @created="newTreatmentDialog = false"
+          ></NewTreatment>
+        </div>
 
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn text="Schliessen" @click="newTreatmentDialog = false"></v-btn>
-      </v-card-actions>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn text="Schliessen" @click="newTreatmentDialog = false"></v-btn>
+        </v-card-actions>
+      </v-card-text>
     </v-card>
   </v-dialog>
 </template>

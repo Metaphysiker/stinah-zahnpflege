@@ -20,7 +20,6 @@ const props = defineProps({
 watch(
   () => props.horseInput,
   (horse) => {
-    console.log(horse);
     horseToBeEdited.value = horseClass.clone(horse);
   },
   { immediate: true }

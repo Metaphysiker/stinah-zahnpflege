@@ -6,6 +6,7 @@ const treatmentToBeEdited = defineModel({
 });
 </script>
 <template>
+  {{ treatmentToBeEdited.horseId }}
   <v-textarea
     label="Notiz"
     v-model="treatmentToBeEdited.note"
