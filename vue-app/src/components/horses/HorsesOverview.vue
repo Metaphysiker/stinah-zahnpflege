@@ -7,6 +7,9 @@ import type { AxiosStatic } from "axios";
 import { Ref, inject, onMounted, ref } from "vue";
 import { IHorse } from "../../interfaces/IHorse";
 import { HorseHelper } from "../../helpers/HorseHelper";
+import TreatmentForm from "../treatments/TreatmentForm.vue";
+import { ITreatment } from "@/interfaces/ITreatment";
+import { Treatment } from "@/classes/Treatment";
 const horseHelper = new HorseHelper();
 const axios: AxiosStatic | undefined = inject("axios");
 const horseService = new HorseService(axios);
@@ -43,13 +46,22 @@ const deleteHorse = () => {
     });
   }
 };
+
+const newTreatmentDialog = ref(false);
+
+const clickOnBehandelt = (horse: IHorse) => {
+  horseTreated(horse);
+  newTreatmentDialog.value = true;
+};
+
+const newTreatment: Ref<ITreatment> = ref(new Treatment());
 </script>
 
 <template>
   <v-container fluid>
     <HorsesTable
       :horses="horses"
-      @clickOnBehandelt="(horse) => horseTreated(horse)"
+      @clickOnBehandelt="(horse) => clickOnBehandelt(horse)"
       @clickOnDelete="
         (horse) => {
           deleteHorseDialog = true;
@@ -110,6 +122,19 @@ const deleteHorse = () => {
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn text="Schliessen" @click="deleteHorseDialog = false"></v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+
+  <v-dialog max-width="500" v-model="newTreatmentDialog">
+    <v-card>
+      <v-card-text>
+        <TreatmentForm v-model="newTreatment"></TreatmentForm>
+      </v-card-text>
+
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn text="Schliessen" @click="newTreatmentDialog = false"></v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

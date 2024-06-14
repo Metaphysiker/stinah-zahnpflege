@@ -1,23 +1,21 @@
 import { AxiosStatic } from "axios";
 import { IService } from "../interfaces/IService";
 import { AxiosInstanceFactory } from "../factories/AxiosInstanceFactory";
-import { IHorse } from "../interfaces/IHorse";
-import { Horse } from "../classes/Horse";
+import { ITreatment } from "@/interfaces/ITreatment";
 
-export class HorseService implements IService {
-  horse: Horse = new Horse();
+export class TreatmentService implements IService {
   axiosInstance: AxiosStatic;
   constructor(axios: AxiosStatic | undefined) {
     this.axiosInstance = AxiosInstanceFactory.createAxiosInstance(axios);
   }
 
   findAll() {
-    return new Promise<IHorse[]>((resolve, reject) => {
+    return new Promise<ITreatment[]>((resolve, reject) => {
       this.axiosInstance
-        .get("api/horses")
+        .get("api/treatments")
         .then((response: any) => {
-          const horses = this.horse.convertToHorses(response.data);
-          resolve(horses);
+          const treatments = this.treatment.convertToHorses(response.data);
+          resolve(treatments);
         })
         .catch((e: any) => {
           reject(e);
@@ -25,12 +23,12 @@ export class HorseService implements IService {
     });
   }
 
-  create(horse: IHorse) {
-    return new Promise<IHorse>((resolve, reject) => {
+  create(treatment: ITreatment) {
+    return new Promise<ITreatment>((resolve, reject) => {
       this.axiosInstance
-        .post("api/horses", horse)
+        .post("api/treatments", treatment)
         .then((response: any) => {
-          const horse = this.horse.convertToHorse(response.data);
+          const horse = this.treatment.convertToHorse(response.data);
           resolve(horse);
         })
         .catch((e: any) => {
@@ -39,12 +37,12 @@ export class HorseService implements IService {
     });
   }
 
-  update(horse: IHorse) {
-    return new Promise<IHorse>((resolve, reject) => {
+  update(treatment: ITreatment) {
+    return new Promise<ITreatment>((resolve, reject) => {
       this.axiosInstance
-        .put("api/horses", horse)
+        .put("api/treatments", treatment)
         .then((response: any) => {
-          const horse = this.horse.convertToHorse(response.data);
+          const horse = this.treatment.convertToHorse(response.data);
           resolve(horse);
         })
         .catch((e: any) => {
@@ -53,10 +51,10 @@ export class HorseService implements IService {
     });
   }
 
-  delete(horse: IHorse) {
+  delete(treatment: ITreatment) {
     return new Promise<void>((resolve, reject) => {
       this.axiosInstance
-        .delete("api/horses/" + horse.id)
+        .delete("api/treatments/" + treatment.id)
         .then((response: any) => {
           resolve();
         })
