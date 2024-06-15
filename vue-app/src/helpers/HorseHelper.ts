@@ -20,4 +20,9 @@ export class HorseHelper {
       this.calculateNextTreatmentDate(horse)
     );
   }
+
+  getLabelForBehandeltButton(horse: IHorse) {
+    if (horse.beschlagen) return "Beschlagen";
+    return "Behandelt";
+  }
 }

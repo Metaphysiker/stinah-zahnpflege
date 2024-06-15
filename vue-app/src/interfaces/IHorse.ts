@@ -7,4 +7,5 @@ export interface IHorse {
   noteForNextTreatment: string;
   createdAt: Date;
   updatedAt: Date;
+  beschlagen: boolean;
 }

@@ -9,4 +9,5 @@ public class Horse : IModel
     public ICollection<Horse> Horses { get; } = new List<Horse>();
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
+    public bool Beschlagen { get; set; } = false;
 }

@@ -46,4 +46,8 @@ const nextTreatmentDate = computed(() => {
     v-model="horseToBeEdited.noteForNextTreatment"
     variant="outlined"
   ></v-textarea>
+  <v-checkbox
+    label="Beschlagen?"
+    v-model="horseToBeEdited.beschlagen"
+  ></v-checkbox>
 </template>

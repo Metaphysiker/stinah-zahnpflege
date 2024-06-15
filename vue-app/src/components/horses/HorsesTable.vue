@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import type { IHorse } from "../../interfaces/IHorse";
 import { DateFormatter } from "../../helpers/DateFormatter";
 import { UrgencyHelper } from "../../helpers/UrgencyHelper";
@@ -104,7 +104,7 @@ const emit = defineEmits([
                 color="primary"
                 class="me-2"
                 @click="clickOnBehandelt(row.item)"
-                >Behandelt</v-btn
+                >{{ horseHelper.getLabelForBehandeltButton(row.item) }}</v-btn
               >
               <v-btn color="green" class="me-2" @click="clickOnEdit(row.item)"
                 ><v-icon> mdi-pencil </v-icon></v-btn

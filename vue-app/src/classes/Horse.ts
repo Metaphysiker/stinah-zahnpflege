@@ -9,6 +9,7 @@ export class Horse implements IHorse {
   noteForNextTreatment: string;
   createdAt: Date;
   updatedAt: Date;
+  beschlagen: boolean;
 
   constructor() {
     this.id = 0;
@@ -19,6 +20,7 @@ export class Horse implements IHorse {
     this.noteForNextTreatment = "";
     this.createdAt = new Date();
     this.updatedAt = new Date();
+    this.beschlagen = false;
   }
 
   clone(original: IHorse): IHorse {
@@ -32,6 +34,7 @@ export class Horse implements IHorse {
     horse.noteForNextTreatment = original.noteForNextTreatment;
     horse.createdAt = new Date(original.createdAt);
     horse.updatedAt = new Date(original.updatedAt);
+    horse.beschlagen = original.beschlagen;
     return horse;
   }
 
@@ -45,6 +48,7 @@ export class Horse implements IHorse {
     this.noteForNextTreatment = horse.noteForNextTreatment;
     this.createdAt = new Date(horse.createdAt);
     this.updatedAt = new Date(horse.updatedAt);
+    this.beschlagen = horse.beschlagen;
     return this;
   }
 
