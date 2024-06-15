@@ -3,9 +3,7 @@ export interface IHorse {
   name: string;
   lastTimeTreated: Date;
   numberOfWeeksUntilNextTreatment: number;
-  birthYear: number;
   noteForNextTreatment: string;
   createdAt: Date;
   updatedAt: Date;
-  beschlagen: boolean;
 }

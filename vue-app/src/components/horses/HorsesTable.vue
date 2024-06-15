@@ -11,7 +11,6 @@ const availableTableDataHeaders = ref([
   { key: "name", title: "Name", selected: true },
   { key: "lastTimeTreated", title: "Letze Behandlung", selected: true },
   { key: "nextTreatmentDate", title: "nächstes Mal", selected: true },
-  { key: "birthYear", title: "Alter", selected: true },
   {
     key: "numberOfWeeksUntilNextTreatment",
     title: "Zahnpflegerhythmus in Wochen",
@@ -80,9 +79,6 @@ const emit = defineEmits([
             </template>
             <template v-if="header.key === 'lastTimeTreated'">
               {{ dateFormatter.dddotmmdotyyyy(row.item["lastTimeTreated"]) }}
-            </template>
-            <template v-if="header.key === 'birthYear'">
-              {{ new Date().getFullYear() - row.item["birthYear"] }}
             </template>
             <template v-if="header.key === 'name'">
               <v-btn @click="clickOnName(row.item)">{{

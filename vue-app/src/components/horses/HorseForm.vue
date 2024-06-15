@@ -35,19 +35,9 @@ const nextTreatmentDate = computed(() => {
   <div class="my-2">
     Nächste Behandlung: <strong>{{ nextTreatmentDate }}</strong>
   </div>
-  <v-text-field
-    label="Jahrgang"
-    v-model="horseToBeEdited.birthYear"
-    variant="underlined"
-    type="number"
-  ></v-text-field>
   <v-textarea
     label="Zu beachten beim nächsten Mal"
     v-model="horseToBeEdited.noteForNextTreatment"
     variant="outlined"
   ></v-textarea>
-  <v-checkbox
-    label="Beschlagen?"
-    v-model="horseToBeEdited.beschlagen"
-  ></v-checkbox>
 </template>

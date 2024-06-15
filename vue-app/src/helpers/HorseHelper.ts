@@ -22,7 +22,6 @@ export class HorseHelper {
   }
 
   getLabelForBehandeltButton(horse: IHorse) {
-    if (horse.beschlagen) return "Beschlagen";
     return "Behandelt";
   }
 }
