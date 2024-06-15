@@ -76,7 +76,7 @@ export class TreatmentService implements IService {
   search(treatmentSearch: ITreatmentSearch) {
     return new Promise<ITreatment[]>((resolve, reject) => {
       this.axiosInstance
-        .post("api/treatments", treatmentSearch)
+        .post("api/treatments/search", treatmentSearch)
         .then((response: any) => {
           const treatments = this.treatmentHelper.convertToTreatments(
             response.data

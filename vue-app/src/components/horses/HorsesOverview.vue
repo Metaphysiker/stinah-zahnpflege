@@ -8,7 +8,10 @@ import { Ref, inject, onMounted, ref } from "vue";
 import { IHorse } from "../../interfaces/IHorse";
 import { HorseHelper } from "../../helpers/HorseHelper";
 import NewTreatment from "../treatments/NewTreatment.vue";
+import HorseCard from "./HorseCard.vue";
 const currentHorse: Ref<IHorse | undefined> = ref(undefined);
+const horseForHorseCard: Ref<IHorse | undefined> = ref(undefined);
+
 const horseHelper = new HorseHelper();
 const axios: AxiosStatic | undefined = inject("axios");
 const horseService = new HorseService(axios);
@@ -47,11 +50,23 @@ const deleteHorse = () => {
 };
 
 const newTreatmentDialog = ref(false);
+const horseCardDialog = ref(false);
 
 const clickOnBehandelt = (horse: IHorse) => {
-  horseTreated(horse);
   currentHorse.value = horse;
   newTreatmentDialog.value = true;
+};
+
+const clickOnName = (horse: IHorse) => {
+  horseForHorseCard.value = horse;
+  horseCardDialog.value = true;
+};
+
+const treatmentCreated = () => {
+  if (currentHorse.value) {
+    horseTreated(currentHorse.value);
+  }
+  newTreatmentDialog.value = false;
 };
 </script>
 
@@ -60,6 +75,7 @@ const clickOnBehandelt = (horse: IHorse) => {
     <HorsesTable
       :horses="horses"
       @clickOnBehandelt="(horse) => clickOnBehandelt(horse)"
+      @click-on-name="(horse) => clickOnName(horse)"
       @clickOnDelete="
         (horse) => {
           deleteHorseDialog = true;
@@ -130,7 +146,7 @@ const clickOnBehandelt = (horse: IHorse) => {
         <div v-if="currentHorse">
           <NewTreatment
             :horse-input="currentHorse"
-            @created="newTreatmentDialog = false"
+            @created="treatmentCreated()"
           ></NewTreatment>
         </div>
 
@@ -139,6 +155,19 @@ const clickOnBehandelt = (horse: IHorse) => {
           <v-btn text="Schliessen" @click="newTreatmentDialog = false"></v-btn>
         </v-card-actions>
       </v-card-text>
+    </v-card>
+  </v-dialog>
+
+  <v-dialog max-width="500" v-model="horseCardDialog">
+    <v-card>
+      <v-card-text v-if="horseForHorseCard">
+        <HorseCard :horse="horseForHorseCard"></HorseCard>
+      </v-card-text>
+
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn text="Schliessen" @click="horseCardDialog = false"></v-btn>
+      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>

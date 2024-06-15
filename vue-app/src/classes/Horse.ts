@@ -7,6 +7,8 @@ export class Horse implements IHorse {
   numberOfWeeksUntilNextTreatment: number;
   birthYear: number;
   noteForNextTreatment: string;
+  createdAt: Date;
+  updatedAt: Date;
 
   constructor() {
     this.id = 0;
@@ -15,6 +17,8 @@ export class Horse implements IHorse {
     this.numberOfWeeksUntilNextTreatment = 8;
     this.birthYear = 0;
     this.noteForNextTreatment = "";
+    this.createdAt = new Date();
+    this.updatedAt = new Date();
   }
 
   clone(original: IHorse): IHorse {
@@ -26,6 +30,8 @@ export class Horse implements IHorse {
       original.numberOfWeeksUntilNextTreatment;
     horse.birthYear = original.birthYear;
     horse.noteForNextTreatment = original.noteForNextTreatment;
+    horse.createdAt = new Date(original.createdAt);
+    horse.updatedAt = new Date(original.updatedAt);
     return horse;
   }
 
@@ -37,6 +43,8 @@ export class Horse implements IHorse {
     this.lastTimeTreated = new Date(horse.lastTimeTreated);
     this.birthYear = horse.birthYear;
     this.noteForNextTreatment = horse.noteForNextTreatment;
+    this.createdAt = new Date(horse.createdAt);
+    this.updatedAt = new Date(horse.updatedAt);
     return this;
   }
 

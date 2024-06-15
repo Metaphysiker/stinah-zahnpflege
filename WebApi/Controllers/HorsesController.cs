@@ -79,6 +79,10 @@ public class HorsesController : ControllerBase
         {
             return NotFound();
         }
+
+        var treatments = _db.Treatments.Where(t => t.HorseId == id);
+        _db.RemoveRange(treatments);
+
         _db.Remove(horse);
         _db.SaveChanges();
         return NoContent();

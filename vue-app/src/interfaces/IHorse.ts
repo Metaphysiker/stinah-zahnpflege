@@ -5,4 +5,6 @@ export interface IHorse {
   numberOfWeeksUntilNextTreatment: number;
   birthYear: number;
   noteForNextTreatment: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

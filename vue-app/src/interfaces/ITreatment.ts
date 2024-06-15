@@ -3,4 +3,6 @@ export interface ITreatment {
   note: string;
   noteForNextTreatment: string;
   horseId: number;
+  createdAt: Date;
+  updatedAt: Date;
 }

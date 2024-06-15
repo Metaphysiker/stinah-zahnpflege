@@ -22,6 +22,7 @@ const availableTableDataHeaders = ref([
 
 const isSpecialColumn = (header: string) => {
   return [
+    "name",
     "lastTimeTreated",
     "birthYear",
     "nextTreatmentDate",
@@ -48,7 +49,16 @@ const clickOnEdit = (horse: IHorse) => {
   emit("clickOnEdit", horse);
 };
 
-const emit = defineEmits(["clickOnBehandelt", "clickOnDelete", "clickOnEdit"]);
+const clickOnName = (horse: IHorse) => {
+  emit("clickOnName", horse);
+};
+
+const emit = defineEmits([
+  "clickOnBehandelt",
+  "clickOnDelete",
+  "clickOnEdit",
+  "clickOnName",
+]);
 </script>
 
 <template>
@@ -73,6 +83,11 @@ const emit = defineEmits(["clickOnBehandelt", "clickOnDelete", "clickOnEdit"]);
             </template>
             <template v-if="header.key === 'birthYear'">
               {{ new Date().getFullYear() - row.item["birthYear"] }}
+            </template>
+            <template v-if="header.key === 'name'">
+              <v-btn @click="clickOnName(row.item)">{{
+                row.item["name"]
+              }}</v-btn>
             </template>
           </div>
           <template v-if="header.key === 'nextTreatmentDate'">

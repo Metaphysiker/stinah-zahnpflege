@@ -24,10 +24,12 @@ const create = () => {
 
 onBeforeMount(() => {
   newTreatment.value.horseId = props.horseInput.id;
+  newTreatment.value.noteForNextTreatment =
+    props.horseInput.noteForNextTreatment;
 });
 </script>
 <template>
-  <v-card-title>Neue Behandlung </v-card-title>
+  <v-card-title>Neuer Behandlungs-Eintrag</v-card-title>
   <v-card-text>
     <TreatmentForm v-model="newTreatment"></TreatmentForm>
     <v-btn @click="create()">Speichern</v-btn>

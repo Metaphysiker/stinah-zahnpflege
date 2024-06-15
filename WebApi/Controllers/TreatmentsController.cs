@@ -16,7 +16,7 @@ public class TreatmentsController : ControllerBase
     [HttpGet]
     public List<Treatment> Get()
     {
-        return _db.Treatments.ToList();
+        return _db.Treatments.ToList(); ;
     }
 
     [HttpGet("{id}")]
