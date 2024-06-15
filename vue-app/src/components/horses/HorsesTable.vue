@@ -14,7 +14,7 @@ const availableTableDataHeaders = ref([
   { key: "birthYear", title: "Alter", selected: true },
   {
     key: "numberOfWeeksUntilNextTreatment",
-    title: "Hufpflegerhythmus in Wochen",
+    title: "Zahnpflegerhythmus in Wochen",
     selected: true,
   },
   { key: "action", title: "Aktion", selected: true },

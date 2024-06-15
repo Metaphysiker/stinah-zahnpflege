@@ -27,7 +27,7 @@ const nextTreatmentDate = computed(() => {
     v-model="horseToBeEdited.lastTimeTreated"
   />
   <v-text-field
-    label="Hufpflegerhythmus in Wochen"
+    label="Zahnpflegerhythmus in Wochen"
     v-model="horseToBeEdited.numberOfWeeksUntilNextTreatment"
     variant="underlined"
     type="number"

@@ -1,4 +1,4 @@
-name: stinah-hufpflege-development
+name: stinah-zahnpflege-development
 services:
   webapi:
     build:
