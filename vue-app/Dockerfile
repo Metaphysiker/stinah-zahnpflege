@@ -19,3 +19,11 @@ EXPOSE 8080
 RUN npm run build
 
 CMD ["npm", "run", "dev", "--", "--port",  "8080", "--host", "0.0.0.0"]
+
+FROM nginx as production-stage
+
+RUN mkdir /app
+
+COPY --from=development-stage /app/dist /app
+
+COPY nginx.conf /etc/nginx/nginx.conf

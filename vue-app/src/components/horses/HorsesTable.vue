@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import type { IHorse } from "../../interfaces/IHorse";
 import { DateFormatter } from "../../helpers/DateFormatter";
 import { UrgencyHelper } from "../../helpers/UrgencyHelper";

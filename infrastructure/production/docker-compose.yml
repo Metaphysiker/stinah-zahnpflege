@@ -1,4 +1,4 @@
-name: stinah-hufpflege-development
+name: stinah-hufpflege-production
 services:
   webapi:
     build:
@@ -14,7 +14,7 @@ services:
     build:
       context: ../../vue-app
       dockerfile: Dockerfile
-      target: development-stage
+      target: production-stage
       args:
         VITE_API_BASE_URL: "${API_BASE_URL}"
     volumes:
@@ -22,13 +22,9 @@ services:
     env_file:
       - .env
     ports:
-      - "${PORT_FRONTEND}:8080"
+      - "${PORT_FRONTEND}:80"
     depends_on:
       - webapi
-  npm:
-    build: ../../tools/npm
-    volumes:
-      - ../../:/app
   dotnet:
     build: ../../tools/dotnet
     volumes:
