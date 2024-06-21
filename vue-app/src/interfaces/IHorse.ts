@@ -6,4 +6,5 @@ export interface IHorse {
   noteForNextTreatment: string;
   createdAt: Date;
   updatedAt: Date;
+  fileKeysString: string;
 }

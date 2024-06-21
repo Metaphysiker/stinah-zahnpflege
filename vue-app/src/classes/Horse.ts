@@ -8,6 +8,7 @@ export class Horse implements IHorse {
   noteForNextTreatment: string;
   createdAt: Date;
   updatedAt: Date;
+  fileKeysString: string;
 
   constructor() {
     this.id = 0;
@@ -17,6 +18,7 @@ export class Horse implements IHorse {
     this.noteForNextTreatment = "";
     this.createdAt = new Date();
     this.updatedAt = new Date();
+    this.fileKeysString = "";
   }
 
   clone(original: IHorse): IHorse {
@@ -29,6 +31,7 @@ export class Horse implements IHorse {
     horse.noteForNextTreatment = original.noteForNextTreatment;
     horse.createdAt = new Date(original.createdAt);
     horse.updatedAt = new Date(original.updatedAt);
+    horse.fileKeysString = original.fileKeysString;
     return horse;
   }
 
@@ -41,6 +44,7 @@ export class Horse implements IHorse {
     this.noteForNextTreatment = horse.noteForNextTreatment;
     this.createdAt = new Date(horse.createdAt);
     this.updatedAt = new Date(horse.updatedAt);
+    this.fileKeysString = horse.fileKeysString;
     return this;
   }
 
